@@ -9,7 +9,7 @@ gameDisplay = pygame.display.set_mode(configTela)
 clock = pygame.time.Clock()
 black = (0, 0, 0)
 white = (255, 255, 255)
-pygame.display.set_caption("CHOVENDO HAMBURGUER -By everson ")
+pygame.display.set_caption("CHOVENDO HAMBÚRGUER -By everson ")
 icone = pygame.image.load("imagens/chuva-hamburguerpng.png")
 pygame.display.set_icon(icone)
 sacola = pygame.image.load("imagens/sacola..png")
@@ -18,6 +18,20 @@ fundo = pygame.image.load("imagens/ceu.png")
 hamburguer = pygame.image.load("imagens/hamburguer.png")
 
 
+def login():
+    
+    nome = input('informe seu nome: ')
+    email = input('informe seu email: ')
+    dados =  "nome: {} - email: {}.".format(nome, email)
+    try:
+        open('login.txt', 'r')
+    except:
+        w = open('login.txt', 'a')
+    w = open('login.txt', 'a')
+    w.write(dados)
+    w.close()
+    r = open('login.txt', 'r')
+    print(r.read())
 
 def mostraSacola(x, y):
     gameDisplay.blit(sacola, (x, y))
@@ -52,15 +66,15 @@ def game():
     sacolaPosicaoY = altura*0.8
     movimentoX = 0
     velocidade = 20
-    hamburguerAltura = 70
-    hamburguerLargura = 100
+    hamburguerAltura = 62
+    hamburguerLargura = 70
     hamburguerVelocidade = 3
     hamburguerX = random.randrange(0, largura-hamburguerLargura)
     hamburguerY = -200
     passou = 0
     pegou = 0
 
-    
+    login()
     while passou <= 10:
         # pega as ações da tela. Ex.: fechar, click de uma tecla ou do mouse
         acoes = pygame.event.get()  # devolve uma lista de ações
@@ -106,4 +120,5 @@ def game():
         mostraSacola(sacolaPosicaoX, sacolaPosicaoY)
         pygame.display.update()
         clock.tick(60)  # faz com que o while execute 60x por segundo
+
 game()
